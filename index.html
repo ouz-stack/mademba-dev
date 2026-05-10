@@ -202,6 +202,9 @@ nav.scrolled{background:rgba(15,23,42,0.9);border-bottom-color:var(--border)}
 .form-textarea{min-height:120px;resize:vertical}
 .form-submit{padding:14px;background:var(--indigo);color:#fff;border:none;border-radius:8px;font-weight:600;font-size:15px;font-family:var(--font-title);cursor:none;transition:all 0.3s}
 .form-submit:hover{background:var(--indigo-light);box-shadow:0 0 30px var(--glow)}
+.form-status{min-height:22px;font-size:14px;font-weight:500;letter-spacing:0.2px;margin-top:12px;color:var(--green);transition:all 0.3s}
+.form-status.error{color:#f87171}
+.form-status.success{color:var(--green)}
 
 footer{padding:40px 0;text-align:center;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
 footer span{color:var(--indigo)}
@@ -299,7 +302,7 @@ footer span{color:var(--indigo)}
       <li><a href="#certifications">Certifications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="documents/rapport-stage-isfad.pdf" download class="nav-cta">Télécharger CV</a>
+    <a href="documents/CV_Alhousseynou_Agne .pdf" download class="nav-cta">Télécharger CV</a>
     <button class="burger" onclick="document.getElementById('mobile-nav').classList.add('open')"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -408,19 +411,19 @@ footer span{color:var(--indigo)}
     </div>
     <div class="projects-grid">
       <div class="project-card fade-up stagger-1">
-        <div class="project-thumb"><img src="images/hemolink1.jpeg" alt="Hemolink" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">🩸</div><span class="project-status status-done">Terminé</span></div>
+        <div class="project-thumb"><img src="images/Hemolink1.jpeg" alt="Hemolink" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">🩸</div><span class="project-status status-done">Terminé</span></div>
         <div class="project-body"><div class="project-icon">🩸</div><div class="project-name">Hemolink</div><div class="project-desc">Plateforme intelligente de mise en relation donneurs de sang / hôpitaux avec géolocalisation et IA de compatibilité sanguine.</div><div class="project-tech"><span class="tech-pill">IA</span><span class="tech-pill">Géolocalisation</span><span class="tech-pill">Wolof/FR</span><span class="tech-pill">SMS</span></div><div class="project-actions"><button class="btn-voir" onclick="openModal('hemolink')">Voir le projet</button></div></div>
       </div>
       <div class="project-card fade-up stagger-2">
-        <div class="project-thumb"><img src="images/transpobot-auth.png" alt="Transpobot" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">🚌</div><span class="project-status status-done">Terminé</span></div>
+        <div class="project-thumb"><img src="images/Transpobot-auth.png" alt="Transpobot" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">🚌</div><span class="project-status status-done">Terminé</span></div>
         <div class="project-body"><div class="project-icon">🚌</div><div class="project-name">TranspoBot</div><div class="project-desc">App web full-stack de gestion de flotte avec chatbot IA Text-to-SQL (GPT-4o-mini) connecté à MySQL.</div><div class="project-tech"><span class="tech-pill">GPT-4o</span><span class="tech-pill">MySQL</span><span class="tech-pill">API REST</span><span class="tech-pill">JS</span></div><div class="project-actions"><button class="btn-voir" onclick="openModal('transpobot')">Voir le projet</button><a href="https://transpobot-ui.onrender.com" target="_blank" class="btn-demo">Demo</a><a href="https://github.com/ix-e/TranspoBot" target="_blank" class="btn-github">GitHub</a></div></div>
       </div>
       <div class="project-card fade-up stagger-3">
-        <div class="project-thumb"><img src="images/projet-multi-as.png" alt="Multi-AS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">📡</div><span class="project-status status-done">Terminé</span></div>
+        <div class="project-thumb"><img src="images/Projet-Multi AS.png" alt="Multi-AS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">📡</div><span class="project-status status-done">Terminé</span></div>
         <div class="project-body"><div class="project-icon">📡</div><div class="project-name">Réseau Multi-AS</div><div class="project-desc">Architecture réseau multi-AS avec routage statique et dynamique (RIP, OSPF, EIGRP, BGP) et services réseau.</div><div class="project-tech"><span class="tech-pill">BGP</span><span class="tech-pill">OSPF</span><span class="tech-pill">EIGRP</span><span class="tech-pill">NAT/DHCP</span></div><div class="project-actions"><button class="btn-voir" onclick="openModal('multias')">Voir le projet</button></div></div>
       </div>
       <div class="project-card fade-up stagger-1">
-        <div class="project-thumb"><img src="images/projet-langage-c.png" alt="Langage C" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">⚙️</div><span class="project-status status-done">Terminé</span></div>
+        <div class="project-thumb"><img src="images/Projet-Language C.png" alt="Langage C" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">⚙️</div><span class="project-status status-done">Terminé</span></div>
         <div class="project-body"><div class="project-icon">⚙️</div><div class="project-name">Analyseur Expressions C</div><div class="project-desc">Analyseur et évaluateur d'expressions arithmétiques : analyse lexicale, syntaxique, détection d'erreurs et calcul.</div><div class="project-tech"><span class="tech-pill">Langage C</span><span class="tech-pill">Algorithmes</span><span class="tech-pill">Parseur</span></div><div class="project-actions"><button class="btn-voir" onclick="openModal('langagec')">Voir le projet</button><a href="https://github.com/maimounadiallo4/projet-langage-C" target="_blank" class="btn-github">GitHub</a></div></div>
       </div>
       <div class="project-card fade-up stagger-2">
@@ -439,6 +442,10 @@ footer span{color:var(--indigo)}
         <div class="project-thumb"><div class="project-thumb-placeholder">🚗</div><span class="project-status status-progress">En cours</span></div>
         <div class="project-body"><div class="project-icon">🚗</div><div class="project-name">Ande Dem</div><div class="project-desc">Plateforme de covoiturage au Sénégal — trajets urbains et interrégionaux avec système d'abonnements.</div><div class="project-tech"><span class="tech-pill">Web</span><span class="tech-pill">Mobile</span><span class="tech-pill">Sénégal</span></div><div class="project-actions"><button class="btn-voir" onclick="openModal('andedem')">Voir le projet</button></div></div>
       </div>
+      <div class="project-card fade-up stagger-1">
+        <div class="project-thumb"><img src="images/interco.png" alt="VFI-VPLS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="project-thumb-placeholder" style="display:none">🔗</div><span class="project-status status-done">Terminé</span></div>
+        <div class="project-body"><div class="project-icon">🔗</div><div class="project-name">Interconnexion VFI-VPLS</div><div class="project-desc">Implémentation d'un réseau VPLS permettant d'interconnecter plusieurs sites distants comme un seul LAN Ethernet via MPLS et VFI, simulé sous GNS3.</div><div class="project-tech"><span class="tech-pill">MPLS</span><span class="tech-pill">VFI</span><span class="tech-pill">VPLS</span><span class="tech-pill">GNS3</span><span class="tech-pill">Cisco</span></div><div class="project-actions"><button class="btn-voir" onclick="openModal('vfivpls')">Voir le projet</button></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -454,7 +461,7 @@ footer span{color:var(--indigo)}
   <div class="container">
     <div class="fade-up"><span class="section-label">Expérience</span><h2 class="section-title">Mon <span>parcours</span> professionnel</h2></div>
     <div class="exp-timeline">
-      <div class="exp-item fade-up"><div class="exp-date">Mars 2026<br>Présent</div><div class="exp-dot"></div><div class="exp-content"><div class="exp-role">Business Developer</div><div class="exp-company">Digital Technologie</div><div class="exp-desc">Développement commercial, identification d'opportunités d'affaires, développement du portefeuille clients et stratégies de croissance. Prospection, négociation et suivi des partenariats.</div><a href="documents/contrat-digital-technologie.pdf" download class="exp-file-btn">📄 Voir le contrat</a></div></div>
+      <div class="exp-item fade-up"><div class="exp-date">Mars 2026<br>Présent</div><div class="exp-dot"></div><div class="exp-content"><div class="exp-role">Business Developer</div><div class="exp-company">Digital Technologie</div><div class="exp-desc">Développement commercial, identification d'opportunités d'affaires, développement du portefeuille clients et stratégies de croissance. Prospection, négociation et suivi des partenariats.</div><a href="documents/Contrat  Alhousseynou AGNE.pdf" download class="exp-file-btn">📄 Voir le contrat</a></div></div>
       <div class="exp-item fade-up"><div class="exp-date">Mai – Juin<br>2025</div><div class="exp-dot"></div><div class="exp-content"><div class="exp-role">Stagiaire Développeur Web</div><div class="exp-company">ISFAD — Institut Supérieur de Formation À Distance</div><div class="exp-desc">Développement d'une plateforme web de gestion des emplois du temps et du cahier de texte virtuel de l'ISFAD.</div><a href="documents/rapport-stage-isfad.pdf" download class="exp-file-btn">📄 Voir le rapport de stage</a></div></div>
       <div class="exp-item fade-up"><div class="exp-date">Oct. 2024<br>2026</div><div class="exp-dot"></div><div class="exp-content"><div class="exp-role">Responsable Coordination Événementielle</div><div class="exp-company">Département Informatique, ESP</div><div class="exp-desc">Orchestration des événements en collaboration avec l'équipe. Synchronisation des tâches et gestion des communications internes.</div></div></div>
       <div class="exp-item fade-up"><div class="exp-date">Jan – Mar<br>2025</div><div class="exp-dot"></div><div class="exp-content"><div class="exp-role">Développeur d'Applications</div><div class="exp-company">ESP</div><div class="exp-desc">Conception collaborative d'une application de gestion pour bibliothèque en Java.</div></div></div>
@@ -467,11 +474,11 @@ footer span{color:var(--indigo)}
   <div class="container">
     <div class="fade-up"><span class="section-label">Certifications</span><h2 class="section-title">Mes <span>certifications</span></h2></div>
     <div class="certs-grid">
-      <div class="cert-card fade-up stagger-1"><div class="cert-icon">🎓</div><div class="cert-name">Certificat Informatique et Internet</div><div class="cert-org">UNCHK</div><a href="certificats/certificat-informatique.pdf" download class="cert-dl">⬇ Télécharger</a></div>
-      <div class="cert-card fade-up stagger-2"><div class="cert-icon">🌐</div><div class="cert-name">Cisco Networking Academy (CCNA)</div><div class="cert-org">Cisco</div><a href="certificats/certificat-cisco.pdf" download class="cert-dl">⬇ Télécharger</a></div>
-      <div class="cert-card fade-up stagger-3"><div class="cert-icon">🔶</div><div class="cert-name">HCIA Datacom (Huawei Certified ICT Associate)</div><div class="cert-org">Huawei</div><a href="images/certificat-hcia.png" download class="cert-dl">⬇ Télécharger</a></div>
-      <div class="cert-card fade-up stagger-1"><div class="cert-icon">📱</div><div class="cert-name">Marketing Digital</div><div class="cert-org">Formation spécialisée</div><a href="certificats/certificat-marketing.pdf" download class="cert-dl">⬇ Télécharger</a></div>
-      <div class="cert-card fade-up stagger-2"><div class="cert-icon">📞</div><div class="cert-name">Certificat Xelcom Voice</div><div class="cert-org">Xelcom</div><a href="certificats/certificat-xelcom.pdf" download class="cert-dl">⬇ Télécharger</a></div>
+      <div class="cert-card fade-up stagger-1"><div class="cert-icon">🎓</div><div class="cert-name">Certificat Informatique et Internet</div><div class="cert-org">UNCHK</div><a href="certificats/Certificat  Informatique et internet.pdf" download class="cert-dl">⬇ Télécharger</a></div>
+      <div class="cert-card fade-up stagger-2"><div class="cert-icon">🌐</div><div class="cert-name">Cisco Networking Academy (CCNA)</div><div class="cert-org">Cisco</div><a href="certificats/Certificat Cisco Networking Academy.pdf" download class="cert-dl">⬇ Télécharger</a></div>
+      <div class="cert-card fade-up stagger-3"><div class="cert-icon">🔶</div><div class="cert-name">HCIA Datacom (Huawei Certified ICT Associate)</div><div class="cert-org">Huawei</div><a href="images/Certificat en HCIA Datacom.png" download class="cert-dl">⬇ Télécharger</a></div>
+      <div class="cert-card fade-up stagger-1"><div class="cert-icon">📱</div><div class="cert-name">Marketing Digital</div><div class="cert-org">Formation spécialisée</div><a href="certificats/Certificat en marketing digital.pdf" download class="cert-dl">⬇ Télécharger</a></div>
+      <div class="cert-card fade-up stagger-2"><div class="cert-icon">📞</div><div class="cert-name">Certificat Xelcom Voice</div><div class="cert-org">Xelcom</div><a href="certificats/Certificat Xelcom voice.pdf" download class="cert-dl">⬇ Télécharger</a></div>
     </div>
   </div>
 </section>
@@ -482,20 +489,21 @@ footer span{color:var(--indigo)}
     <div class="contact-grid">
       <div class="fade-left">
         <div class="contact-info">
-          <div class="contact-item"><div class="contact-item-icon">📧</div><div><div class="contact-item-label">Email</div><div class="contact-item-value">agnealhousseynou@gmail.com</div></div></div>
-          <div class="contact-item"><div class="contact-item-icon">📱</div><div><div class="contact-item-label">Téléphone / WhatsApp</div><div class="contact-item-value">+221 77 845 40 68</div></div></div>
+          <div class="contact-item"><div class="contact-item-icon">📧</div><div><div class="contact-item-label">Email</div><a href="mailto:agnealhousseynou@gmail.com" class="contact-item-value" style="color:var(--indigo)">agnealhousseynou@gmail.com</a></div></div>
+          <div class="contact-item"><div class="contact-item-icon">📱</div><div><div class="contact-item-label">Téléphone / WhatsApp</div><a href="https://wa.me/221778454068?text=Bonjour%20Alhousseynou Agne" target="_blank" class="contact-item-value" style="color:var(--indigo)">+221 77 845 40 68</a></div></div>
           <div class="contact-item"><div class="contact-item-icon">💼</div><div><div class="contact-item-label">LinkedIn</div><a href="https://www.linkedin.com/in/alhousseynou-agne-a2a44b279/" target="_blank" class="contact-item-value" style="color:var(--indigo)">alhousseynou-agne</a></div></div>
-          <div class="contact-item"><div class="contact-item-icon">💻</div><div><div class="contact-item-label">GitHub Portfolio</div><a href="https://ouz-stack.github.io/Second-portfolio/" target="_blank" class="contact-item-value" style="color:var(--indigo)">Voir portfolio GitHub</a></div></div>
+          <div class="contact-item"><div class="contact-item-icon">💻</div><div><div class="contact-item-label">GitHub Portfolio</div><a href="https://ouz-stack.github.io/mademba-dev/" target="_blank" class="contact-item-value" style="color:var(--indigo)">Voir portfolio GitHub</a></div></div>
           <div class="contact-item"><div class="contact-item-icon">📍</div><div><div class="contact-item-label">Localisation</div><div class="contact-item-value">Dakar, Sénégal 🇸🇳</div></div></div>
         </div>
       </div>
       <div class="fade-right">
         <div class="contact-form">
-          <div class="form-group"><label class="form-label">Nom complet</label><input type="text" class="form-input" placeholder="Votre nom"></div>
-          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="votre@email.com"></div>
-          <div class="form-group"><label class="form-label">Sujet</label><input type="text" class="form-input" placeholder="Opportunité, collaboration..."></div>
-          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Votre message..."></textarea></div>
-          <button class="form-submit" onclick="alert('Merci ! Alhousseynou vous répondra rapidement.')">Envoyer le message ✉️</button>
+          <div class="form-group"><label class="form-label">Nom complet</label><input type="text" class="form-input" id="user_name" placeholder="Votre nom"></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="user_email" placeholder="votre@email.com"></div>
+          <div class="form-group"><label class="form-label">Sujet</label><input type="text" class="form-input" id="subject" placeholder="Opportunité, collaboration..."></div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" id="message" placeholder="Votre message..."></textarea></div>
+          <button type="button" class="form-submit" onclick="sendEmail()">Envoyer le message ✉️</button>
+          <div id="form-status" class="form-status"></div>
         </div>
       </div>
     </div>
@@ -508,7 +516,7 @@ footer span{color:var(--indigo)}
 <div id="chatbot-window">
   <div class="chat-header">
     <div class="chat-avatar">🤖</div>
-    <div class="chat-header-info"><div class="chat-name">Assistant IA — Alhousseynou</div><div class="chat-status-line">En ligne</div></div>
+    <div class="chat-header-info"><div class="chat-name">Assistant IA — Alhousseynou</div><div class="chat-status-line">En ligne <span id="chat-time"></span></div></div>
     <button class="chat-close-btn" onclick="toggleChat()">✕</button>
   </div>
   <div class="chat-messages" id="chat-messages"></div>
@@ -524,6 +532,66 @@ footer span{color:var(--indigo)}
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+// EMAILJS INIT
+(function(){
+  emailjs.init('3ypqn4W7fe_tNN-LR');
+})();
+
+function sendEmail(){
+  const statusEl = document.getElementById('form-status');
+  const name = document.getElementById('user_name').value.trim();
+  const email = document.getElementById('user_email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  function setFormStatus(text, type){
+    statusEl.textContent = text;
+    statusEl.className = 'form-status ' + type;
+  }
+
+  if(!name || !email || !subject || !message){
+    setFormStatus('⚠️ Veuillez remplir tous les champs.', 'error');
+    return;
+  }
+
+  // Validation email simple
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRegex.test(email)){
+    setFormStatus('⚠️ Veuillez entrer une adresse email valide.', 'error');
+    return;
+  }
+
+  const params = {
+    from_name: name,
+    from_email: email,
+    subject: subject,
+    message: message
+  };
+
+  console.log('Envoi du formulaire...', params);
+  setFormStatus('Envoi en cours...', '');
+  
+  emailjs.send('service_4epzkes', 'template_x0bogrl', params)
+    .then(res => {
+      console.log('Email envoyé avec succès:', res);
+      setFormStatus('✅ Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.', 'success');
+      document.getElementById('user_name').value = '';
+      document.getElementById('user_email').value = '';
+      document.getElementById('subject').value = '';
+      document.getElementById('message').value = '';
+      setTimeout(() => {
+        statusEl.textContent = '';
+        statusEl.className = 'form-status';
+      }, 10000);
+    })
+    .catch(err => {
+      console.error('Erreur EmailJS complète:', err);
+      setFormStatus('❌ Erreur lors de l\'envoi. Vérifiez votre connexion internet ou contactez directement : agnealhousseynou@gmail.com', 'error');
+    });
+}
+</script>
 <script>
 // CURSOR
 const cursor=document.getElementById('cursor'),trail=document.getElementById('cursor-trail');
@@ -564,12 +632,13 @@ document.querySelectorAll('.fade-up,.fade-left,.fade-right').forEach(el=>obs.obs
 const projects={
   hemolink:{title:'Hemolink — Plateforme de don de sang',status:'Terminé',statusClass:'status-done',imgs:['images/hemolink1.jpeg','images/hemolink2.jpeg','images/hemolink3.jpeg','images/hemolink4.jpeg'],desc:'Système intelligent de mise en relation en temps réel entre donneurs de sang et hôpitaux en situation d\'urgence au Sénégal. Intègre la géolocalisation, un algorithme de compatibilité sanguine et un module IA de prévision des pénuries. Interface en Wolof/Français, mode hors-ligne et alternative SMS.',features:['Mise en relation temps réel donneurs / hôpitaux','Géolocalisation intégrée','Algorithme de compatibilité sanguine','Module IA de prévision des pénuries','Interface en Wolof/Français','Mode hors-ligne + alternative SMS'],tech:['IA','Géolocalisation','Wolof/Français','SMS','Mode hors-ligne'],github:null,demo:null,pdf:null,creds:null},
   transpobot:{title:'TranspoBot — Gestion de flotte intelligente',status:'Terminé',statusClass:'status-done',imgs:['images/transpobot-auth.png','images/transpobot-chat1.png','images/transpobot-chat2.png','images/tableau-de-bord.png'],desc:'Application web full-stack de gestion de transport urbain d\'une flotte, intégrant un assistant conversationnel IA (Text-to-SQL) connecté à une base MySQL. L\'utilisateur pose une question en langage naturel et le modèle génère automatiquement la requête SQL correspondante.',features:['Chatbot NL → SQL (GPT-4o-mini)','Tableau de bord en temps réel','Gestion véhicules & chauffeurs','Suivi trajets & incidents','API REST sécurisée (SELECT only)','Interface responsive vanilla JS'],tech:['GPT-4o-mini','MySQL','API REST','JavaScript','PHP','JWT'],github:'https://github.com/ix-e/TranspoBot',demo:'https://transpobot-ui.onrender.com',pdf:null,creds:'Login: gestionnaire2@transpobot.sn | MDP: Transpo2026!'},
-  multias:{title:'Conception Réseau Multi-AS',status:'Terminé',statusClass:'status-done',imgs:['images/projet-multi-as.png'],desc:'Mise en place d\'une architecture réseau multi-AS avec optimisation du routage et des services réseau. Mise en pratique des connaissances en routage statique et dynamique (RIP, OSPF, EIGRP, BGP) ainsi qu\'en services réseau (NAT, DHCP, DNS).',features:['Routage statique et dynamique','Protocoles RIP, OSPF, EIGRP, BGP','Services NAT, DHCP, DNS','Architecture multi-AS','Sécurisation du réseau'],tech:['BGP','OSPF','EIGRP','RIP','NAT','DHCP','DNS'],github:null,demo:null,pdf:'documents/projet-keba-gueye.pdf',creds:null},
+  multias:{title:'Conception Réseau Multi-AS',status:'Terminé',statusClass:'status-done',imgs:['images/projet-multi-as.png'],desc:'Mise en place d\'une architecture réseau multi-AS avec optimisation du routage et des services réseau. Mise en pratique des connaissances en routage statique et dynamique (RIP, OSPF, EIGRP, BGP) ainsi qu\'en services réseau (NAT, DHCP, DNS).',features:['Routage statique et dynamique','Protocoles RIP, OSPF, EIGRP, BGP','Services NAT, DHCP, DNS','Architecture multi-AS','Sécurisation du réseau'],tech:['BGP','OSPF','EIGRP','RIP','NAT','DHCP','DNS'],github:null,demo:null,pdf:'documents/Projet keba gueye.pdf',creds:null},
   langagec:{title:'Analyseur d\'Expressions — Langage C',status:'Terminé',statusClass:'status-done',imgs:['images/projet-langage-c.png'],desc:'Projet académique : conception et implémentation d\'un programme en langage C permettant l\'analyse lexicale et syntaxique d\'expressions arithmétiques, la détection d\'erreurs de syntaxe et l\'évaluation du résultat.',features:['Analyse lexicale des expressions','Analyse syntaxique','Détection d\'erreurs de syntaxe','Évaluation et calcul du résultat','Code propre et documenté'],tech:['Langage C','Algorithmique','Parseur','Analyse lexicale'],github:'https://github.com/maimounadiallo4/projet-langage-C',demo:null,pdf:null,creds:null},
-  pabx:{title:'Téléphonie IP avec PABX',status:'Terminé',statusClass:'status-done',imgs:[],desc:'Mise en place d\'un système de téléphonie IP basé sur un PABX pour une entreprise, permettant aux différents équipements (téléphones IP, ordinateurs, softphones) de communiquer entre eux via le réseau local.',features:['Configuration PABX','Téléphonie IP sur réseau local','Intégration softphones','Configuration SIP','Tests de communication','Documentation réseau'],tech:['Asterisk','SIP','PABX','VoIP','Réseau LAN'],github:null,demo:null,pdf:'documents/compte-rendu-asterix.pdf',creds:null},
+  pabx:{title:'Téléphonie IP avec PABX',status:'Terminé',statusClass:'status-done',imgs:[],desc:'Mise en place d\'un système de téléphonie IP basé sur un PABX pour une entreprise, permettant aux différents équipements (téléphones IP, ordinateurs, softphones) de communiquer entre eux via le réseau local.',features:['Configuration PABX','Téléphonie IP sur réseau local','Intégration softphones','Configuration SIP','Tests de communication','Documentation réseau'],tech:['Asterisk','SIP','PABX','VoIP','Réseau LAN'],github:null,demo:null,pdf:'documents/COMPTE RENDU Asterisque .pdf',creds:null},
   biblio:{title:'Application Gestion Bibliothèque',status:'Terminé',statusClass:'status-done',imgs:[],desc:'Application web permettant la gestion complète d\'une bibliothèque : livres, utilisateurs et emprunts. Projet académique ESP réalisé en Java avec une approche orientée objet.',features:['Gestion des livres (CRUD)','Gestion des utilisateurs','Système d\'emprunts et retours','Recherche avancée','Interface intuitive','Conception orientée objet'],tech:['Java','POO','Base de données','MVC'],github:null,demo:null,pdf:'documents/projet-poo.pdf',creds:null},
   iot:{title:'Systèmes Embarqués IoT — Arduino',status:'Terminé',statusClass:'status-done',imgs:[],desc:'Conception d\'un système IoT à base d\'Arduino Uno pour la surveillance multi-capteurs : température corporelle, niveau d\'eau, humidité du sol pour l\'agriculture intelligente, et détection d\'obstacles.',features:['Acquisition de la température corporelle','Surveillance du niveau d\'eau','Détection automatique de seuils critiques','Mesure humidité du sol (agriculture)','Détection d\'obstacles via capteurs'],tech:['Arduino Uno','C++','Capteurs','IoT','Électronique'],github:null,demo:null,pdf:null,creds:null},
-  andedem:{title:'Ande Dem — Covoiturage Sénégal',status:'En cours',statusClass:'status-progress',imgs:[],desc:'Plateforme web et mobile de covoiturage visant à optimiser les déplacements urbains et interrégionaux au Sénégal. Permet aux utilisateurs de proposer ou réserver des trajets avec un système d\'abonnements.',features:['Proposition et réservation de trajets','Système d\'abonnements multi-niveaux','Profils utilisateurs complets','Priorisation des réservations','Réduction des coûts de transport','Mobilité collaborative'],tech:['Web','Mobile','API REST','Sénégal'],github:null,demo:null,pdf:null,creds:null}
+  andedem:{title:'Ande Dem — Covoiturage Sénégal',status:'En cours',statusClass:'status-progress',imgs:[],desc:'Plateforme web et mobile de covoiturage visant à optimiser les déplacements urbains et interrégionaux au Sénégal. Permet aux utilisateurs de proposer ou réserver des trajets avec un système d\'abonnements.',features:['Proposition et réservation de trajets','Système d\'abonnements multi-niveaux','Profils utilisateurs complets','Priorisation des réservations','Réduction des coûts de transport','Mobilité collaborative'],tech:['Web','Mobile','API REST','Sénégal'],github:null,demo:null,pdf:null,creds:null},
+  vfivpls:{title:'Interconnexion VFI-VPLS',status:'Terminé',statusClass:'status-done',imgs:['images/interco.png'],desc:'Implémentation d\'un réseau Virtual Private LAN Service (VPLS) permettant d\'interconnecter plusieurs sites distants comme un seul LAN Ethernet, via MPLS et VFI. Le projet a été entièrement simulé sous GNS3 avec des routeurs Cisco.',features:['Conception de la topologie MPLS/VFI','Interconnexion multi-sites via VPLS','Simulation complète sous GNS3','Configuration routeurs Cisco','Tests de connectivité inter-sites','Documentation technique détaillée'],tech:['MPLS','VFI','VPLS','GNS3','Cisco IOS','Réseaux LAN'],github:null,demo:null,pdf:'documents/Rapport_interco_vfi_vpls.pdf',creds:null},
 };
 
 // MODAL
@@ -594,7 +663,7 @@ const CONTEXT=`Tu es l'assistant IA personnel du portfolio d'Alhousseynou Agne. 
 
 PROFIL: Alhousseynou Agne, DIC 1 en Informatique & Réseaux et Télécommunications, ESP Dakar. DUT Informatique (2024-2026). Bac S1 Mention Assez Bien (2023).
 
-PROJETS: Hemolink (plateforme don de sang avec IA/géoloc), TranspoBot (gestion flotte+chatbot IA Text-to-SQL, démo: transpobot-ui.onrender.com, GitHub: github.com/ix-e/TranspoBot), Réseau Multi-AS (BGP/OSPF/EIGRP), Analyseur Langage C (github.com/maimounadiallo4/projet-langage-C), Téléphonie IP PABX (Asterisk/SIP), Gestion Bibliothèque (Java), Systèmes Embarqués IoT (Arduino), Ande Dem (covoiturage Sénégal, en cours).
+PROJETS: Hemolink (plateforme don de sang avec IA/géoloc), TranspoBot (gestion flotte+chatbot IA Text-to-SQL, démo: transpobot-ui.onrender.com, GitHub: github.com/ix-e/TranspoBot), Réseau Multi-AS (BGP/OSPF/EIGRP), Interconnexion VFI-VPLS (MPLS/VFI/VPLS sous GNS3), Analyseur Langage C (github.com/maimounadiallo4/projet-langage-C), Téléphonie IP PABX (Asterisk/SIP), Gestion Bibliothèque (Java), Systèmes Embarqués IoT (Arduino), Ande Dem (covoiturage Sénégal, en cours).
 
 COMPÉTENCES: HTML/CSS/JS/React/PHP/Java/Python, Réseaux TCP-IP/BGP/OSPF/VLAN/Asterisk, Linux/SSH/Apache, IA/ML/APIs IA, GitHub/Figma/Wireshark/Kali Linux.
 
@@ -607,8 +676,27 @@ CONTACT: Email: agnealhousseynou@gmail.com, Tel/WhatsApp: +221 77 845 40 68, Lin
 Si une info est absente, dis-le poliment. Réponds en français par défaut.`;
 
 let hist=[],chatOpen=false;
+
+// Fonction pour mettre à jour l'heure en temps réel dans le chatbot
+function updateChatTime() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('fr-FR', { 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit' 
+  });
+  const timeElement = document.getElementById('chat-time');
+  if (timeElement) {
+    timeElement.textContent = `• ${timeString}`;
+  }
+}
+
+// Mettre à jour l'heure toutes les secondes
+setInterval(updateChatTime, 1000);
+updateChatTime(); // Appel initial
+
 function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatbot-window').classList.toggle('open',chatOpen);if(chatOpen&&hist.length===0)addBot('👋 Bonjour ! Je suis l\'assistant IA d\'Alhousseynou.\n\nPosez-moi vos questions :\n• Qui est Alhousseynou ?\n• Quels sont ses projets ?\n• Comment le contacter ?')}
-function addBot(t){const m=document.getElementById('chat-messages'),d=document.createElement('div');d.className='msg bot';d.innerHTML='<div class="msg-av">🤖</div><div class="msg-bubble">'+t.replace(/\n/g,'<br>')+'</div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
+function addBot(t){const m=document.getElementById('chat-messages'),d=document.createElement('div');d.className='msg bot';d.innerHTML='<div class="msg-av">🤖</div><div class="msg-bubble">'+t.replace(/\*\*/g,'').replace(/\n/g,'<br>')+'</div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
 function addUser(t){const m=document.getElementById('chat-messages'),d=document.createElement('div');d.className='msg user';d.innerHTML='<div class="msg-bubble">'+t+'</div><div class="msg-av">👤</div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
 function addTyping(){const m=document.getElementById('chat-messages'),d=document.createElement('div');d.className='msg bot';d.id='tind';d.innerHTML='<div class="msg-av">🤖</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
 function removeTyping(){const e=document.getElementById('tind');if(e)e.remove()}
@@ -617,10 +705,17 @@ async function sendMessage(){
   inp.value='';document.getElementById('chat-suggestions').style.display='none';
   addUser(t);hist.push({role:'user',content:t});addTyping();
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:CONTEXT,messages:hist})});
-    const d=await r.json();const rep=d.content?.[0]?.text||'Désolé, une erreur est survenue.';
+    const apiKey = 'AIzaSyCAVBi7TPJ_BR6U4KwJGDL7fuyuZKr4el0'; // Replace with your actual Gemini API key
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const contents = [
+      { parts: [{ text: CONTEXT }], role: 'user' },
+      ...hist.map(h => ({ parts: [{ text: h.content }], role: h.role === 'assistant' ? 'model' : 'user' }))
+    ];
+    const r = await fetch(url, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ contents })});
+    const d = await r.json();
+    const rep = d.candidates?.[0]?.content?.parts?.[0]?.text || 'Désolé, une erreur est survenue.';
     removeTyping();addBot(rep);hist.push({role:'assistant',content:rep});
-  }catch(e){removeTyping();addBot('Connexion indisponible. Contactez directement Alhousseynou : agnealhousseynou@gmail.com')}
+  }catch(e){removeTyping();addBot('Connexion indisponible.Verifiez votre connexion internet  ou Contactez directement Alhousseynou : agnealhousseynou@gmail.com')}
 }
 function sendSuggestion(b){document.getElementById('chat-input').value=b.textContent;sendMessage()}
 
