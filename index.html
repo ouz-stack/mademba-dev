@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alhousseynou Agne — Ingénieur Informatique & Réseaux</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -208,6 +209,10 @@ nav.scrolled{background:rgba(15,23,42,0.9);border-bottom-color:var(--border)}
 
 footer{padding:40px 0;text-align:center;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
 footer span{color:var(--indigo)}
+
+#scroll-to-top{position:fixed;bottom:30px;left:30px;z-index:3999;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--green),#10b981);border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(34,197,94,0.3);transition:all 0.3s;font-size:15px;color:#fff}
+#scroll-to-top:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(34,197,94,0.5)}
+#scroll-to-top.show{display:flex}
 
 #chatbot-toggle{position:fixed;bottom:30px;right:30px;z-index:4000;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),#818cf8);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(99,102,241,0.4);transition:all 0.3s;font-size:22px}
 #chatbot-toggle:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(99,102,241,0.6)}
@@ -512,6 +517,7 @@ footer span{color:var(--indigo)}
 
 <footer><div class="container"><p>© 2026 <span>Alhousseynou Agne</span> — Conçu &amp; développé avec passion 🇸🇳</p></div></footer>
 
+<button id="scroll-to-top" onclick="scrollToTop()">↑</button>
 <button id="chatbot-toggle" onclick="toggleChat()">🤖<span class="chat-notif"></span></button>
 <div id="chatbot-window">
   <div class="chat-header">
@@ -724,6 +730,10 @@ document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(b=>{
   b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform='translate('+(x*.15)+'px,'+(y*.15)+'px)'});
   b.addEventListener('mouseleave',()=>b.style.transform='');
 });
+
+// Scroll to Top Button
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+window.addEventListener('scroll',()=>{const b=document.getElementById('scroll-to-top');window.scrollY>300?b.classList.add('show'):b.classList.remove('show')});
 </script>
 </body>
 </html>
