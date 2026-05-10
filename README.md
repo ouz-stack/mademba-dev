@@ -1,4 +1,4 @@
-# 🚀 Portfolio de Mademba Diakhate
+# 🚀 Portfolio de Alhousseynou Agne 
 
 Bienvenue sur mon portfolio personnel.  
 Je suis étudiant en ingénierie informatique et technicien support en Télécoms, Réseaux et Informatique.  
@@ -23,21 +23,11 @@ Actuellement étudiant à l’ESP (École Supérieure Polytechnique), je travail
 ## 🛠️ Technologies utilisées
 
 ### Frontend
-- React.js
 - HTML5
 - CSS3
 - JavaScript
 - Tailwind CSS
 
-### Backend
-- Node.js
-- Express.js
-- PHP
-- FastAPI
-
-### Base de données
-- MySQL
-- MongoDB
 
 ### Réseaux & Systèmes
 - Cisco Packet Tracer
@@ -65,14 +55,17 @@ Application de gestion de flotte avec chatbot IA Text-to-SQL.
 ### 🔹 Réseau Multi-AS
 Projet réseau utilisant les protocoles BGP, OSPF et EIGRP dans une architecture multi-AS.
 
-### 🔹 AirQualiSchool
-Système intelligent de surveillance de la qualité de l’air dans les écoles.
+### 🔹 Téléphonie IP / PABX
+Système de téléphonie IP basé sur PABX pour entreprise — téléphones IP, softphones via réseau local.
 
-### 🔹 Gestion d’emplois du temps
+### 🔹 Interconnexion VFI-VPLS
 Application web de gestion des emplois du temps et cahier de textes virtuel.
 
 ### 🔹 Projet Langage C
 Projet académique réalisé en langage C avec implémentation d’algorithmes et structures de données.
+
+### 🔹 Interconnexion VFI-VPLS
+Implémentation d'un réseau VPLS permettant d'interconnecter plusieurs sites distants comme un seul LAN Ethernet via MPLS et VFI, simulé sous GNS3.
 
 ---
 
