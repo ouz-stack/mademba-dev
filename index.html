@@ -522,7 +522,7 @@ footer span{color:var(--indigo)}
 <div id="chatbot-window">
   <div class="chat-header">
     <div class="chat-avatar">🤖</div>
-    <div class="chat-header-info"><div class="chat-name">Assistant IA — Alhousseynou</div><div class="chat-status-line">En ligne <span id="chat-time"></span></div></div>
+    <div class="chat-header-info"><div class="chat-name">Assistant IA — Alhousseynou</div><div class="chat-status-line">En ligne — <span id="chat-clock"></span></div></div>
     <button class="chat-close-btn" onclick="toggleChat()">✕</button>
   </div>
   <div class="chat-messages" id="chat-messages"></div>
@@ -665,71 +665,14 @@ function closeModal(){document.getElementById('modal-overlay').classList.remove(
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 // CHATBOT
-const GEMINI_KEY = 'AIzaSyAHvrdhwkwD5iXsaJoG3Y6ipcoJEggEtB0';
-
-const CONTEXT = `Tu es l'assistant IA personnel du portfolio d'Alhousseynou Agne. 
-Tu peux répondre à toutes les questions, mais tu restes centré sur son portfolio.
-Sois chaleureux, naturel et professionnel. Réponds en français par défaut.
-Si on te salue, réponds poliment. Si la question n'est pas liée au portfolio, 
-réponds brièvement et redirige vers le portfolio.
-
-PROFIL COMPLET:
-- Nom : Alhousseynou Agne
-- Formation : DIC 1 Informatique & Réseaux, ESP Dakar
-- DUT Informatique & Réseaux (2024-2026), Bac S1 Mention Assez Bien (2023)
-
-PROJETS:
-- Hemolink : plateforme don de sang, IA + géolocalisation, interface Wolof/Français
-- TranspoBot : gestion flotte + chatbot Text-to-SQL GPT-4o, démo: transpobot-ui.onrender.com
-- VFI-VPLS : interconnexion réseau MPLS multi-sites sous GNS3 Cisco
-- Réseau Multi-AS : BGP, OSPF, EIGRP, NAT, DHCP
-- Analyseur Langage C : analyse lexicale et syntaxique
-- Téléphonie IP PABX : Asterisk, SIP, VoIP
-- Bibliothèque Java : gestion livres et emprunts (POO)
-- IoT Arduino : capteurs température, eau, humidité, obstacles
-- Ande Dem : covoiturage Sénégal (en cours)
-
-COMPÉTENCES:
-- Développement : HTML, CSS, JS, React, PHP, Java, Python
-- Réseaux : BGP, OSPF, EIGRP, VLAN, Asterisk, SIP, TCP/IP
-- Système : Linux, SSH, Apache, Nginx
-- IA : Machine Learning, APIs IA, Prompt Engineering
-- Outils : GitHub, Figma, Wireshark, GNS3, Kali Linux
-
-EXPÉRIENCE:
-- Business Developer, Digital Technologie (Mars 2026-présent)
-- Stagiaire Développeur Web, ISFAD (Mai-Juin 2025)
-- Coordinateur Événementiel, ESP (Oct.2024-2026)
-- Graphiste Freelance (Jan.2024-présent)
-
-CERTIFICATIONS: Cisco CCNA, HCIA Datacom Huawei, Certificat Informatique UNCHK, Marketing Digital, Xelcom Voice
-
-CONTACT: Email: agnealhousseynou@gmail.com | WhatsApp: +221 77 845 40 68
-LinkedIn: linkedin.com/in/alhousseynou-agne-a2a44b279 | Dakar, Sénégal`;
 
 let hist=[], chatOpen=false;
-
-function updateChatTime() {
-  const now = new Date();
-  const timeString = now.toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  });
-  const timeElement = document.getElementById('chat-time');
-  if (timeElement) {
-    timeElement.textContent = `• ${timeString}`;
-  }
-}
-
-setInterval(updateChatTime, 1000);
-updateChatTime();
 
 function toggleChat(){
   chatOpen=!chatOpen;
   document.getElementById('chatbot-window').classList.toggle('open',chatOpen);
   if(chatOpen && hist.length===0){
-    addBot('👋 Salam ! Bienvenue sur le portfolio d\'Alhousseynou Agne.\n\nJe suis son assistant IA — posez-moi n\'importe quelle question sur lui !');
+    addBot('👋 Salam ! Bienvenue sur le portfolio d\'Alhousseynou Agne 🇸🇳\n\nJe suis son assistant virtuel. Posez-moi n\'importe quelle question sur lui !');
   }
 }
 
@@ -754,48 +697,185 @@ function addTyping(){
   m.appendChild(d); m.scrollTop=m.scrollHeight;
 }
 
-function removeTyping(){
-  const e=document.getElementById('tind'); if(e) e.remove();
-}
+function removeTyping(){ const e=document.getElementById('tind'); if(e) e.remove(); }
+
+function sendSuggestion(b){ document.getElementById('chat-input').value=b.textContent; sendMessage(); }
 
 async function sendMessage(){
   const inp=document.getElementById('chat-input'), t=inp.value.trim();
   if(!t) return;
   inp.value='';
   document.getElementById('chat-suggestions').style.display='none';
-  addUser(t);
-  hist.push({role:'user', parts:[{text:t}]});
-  addTyping();
+  addUser(t); addTyping();
+  await new Promise(r=>setTimeout(r,600+Math.random()*400));
+  removeTyping();
 
-  try{
-    const messages = hist.map(m => ({role: m.role, parts: m.parts}));
-    const r = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({
-          system_instruction:{parts:[{text: CONTEXT}]},
-          contents: messages
-        })
-      }
-    );
-    const data = await r.json();
-    const rep = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Désolé, je n\'ai pas pu répondre.';
-    removeTyping();
-    addBot(rep);
-    hist.push({role:'model', parts:[{text:rep}]});
-  } catch(e){
-    removeTyping();
-    addBot('Connexion indisponible. Contactez directement Alhousseynou :\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68');
+  const q=t.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9\s]/g,' ');
+
+  const has = (...words) => words.some(w => q.includes(w));
+
+  let rep = '';
+
+  // ===== SALUTATIONS =====
+  if(has('salam','salamu','aleykoum','waalaykoum')){
+    rep='Wa Aleykoum Salam wa Rahmatullahi wa Barakatuh ! 🤝\n\nBienvenue sur le portfolio d\'**Alhousseynou Agne**.\nJe suis son assistant virtuel, ravi de vous accueillir !\n\nQue souhaitez-vous savoir sur lui ?';
+
+  } else if(has('bonjour','bonsoir','salut','hello','hi ','hey','bonne journee','good morning','good evening')){
+    rep='Bonjour et bienvenue ! 😊\n\nJe suis l\'assistant virtuel d\'**Alhousseynou Agne**, élève ingénieur à l\'ESP Dakar 🇸🇳\n\nJe peux vous parler de :\n• 👨‍💻 Son profil et sa formation\n• 💼 Ses projets et réalisations\n• 🛠️ Ses compétences techniques\n• 📜 Ses certifications\n• 📬 Comment le contacter\n\nQue voulez-vous savoir ?';
+
+  } else if(has('ca va','ça va','comment tu vas','comment vous allez','comment allez','tu vas bien','vas-tu','comment vas')){
+    rep='Je vais très bien, merci de demander ! 😄\n\nJe suis l\'assistant d\'Alhousseynou, toujours disponible pour vous renseigner sur son parcours.\n\nEt vous ? Puis-je vous aider à découvrir quelque chose sur lui ?';
+
+  } else if(has('merci','thank','shukran','jerejef','jerejeuf')){
+    rep='Avec grand plaisir ! 🙏\n\nN\'hésitez pas si vous avez d\'autres questions sur Alhousseynou.\nVous pouvez aussi le contacter directement :\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68 (WhatsApp)';
+
+  } else if(has('au revoir','bye','a bientot','bonne continuation','ciao','adieu')){
+    rep='Au revoir et merci de votre visite ! 👋\n\nN\'hésitez pas à revenir ou à contacter Alhousseynou directement.\n\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68';
+
+  } else if(has('bravo','felicitation','bien','super','excellent','impressionnant','magnifique','beau portfolio')){
+    rep='Merci beaucoup ! 😊 C\'est très encourageant.\n\nAlhousseynou met beaucoup de sérieux dans son travail. Si vous souhaitez collaborer avec lui ou en savoir plus :\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68';
+
+  // ===== IDENTITÉ =====
+  } else if(has('qui est','il s appelle','son nom','c est qui','prenom','name','presente','présente','parle moi de lui','dis moi sur','kesako','c\'est quoi')){
+    rep='👨‍💻 **Alhousseynou Agne** est un élève ingénieur sénégalais passionné de technologie.\n\n🎓 Formation : DIC 1 en Informatique & Réseaux, ESP Dakar\n🏆 DUT Informatique & Réseaux (2024-2026)\n📍 Basé à Dakar, Sénégal 🇸🇳\n\nIl combine :\n• Développement web & logiciel\n• Administration réseaux & systèmes\n• Intelligence artificielle\n• Business & Marketing digital\n\nDisponible pour stages, collaborations et opportunités pro !';
+
+  } else if(has('age','ans','né','naissance','date')){
+    rep='Cette information n\'est pas publique sur le portfolio.\n\nCe que je sais : Alhousseynou a obtenu son **Bac S1 en 2023** et est actuellement en **DIC 1 à l\'ESP Dakar**. 😊';
+
+  } else if(has('nationalite','origine','vient de','pays','senegal','dakar','senegalais')){
+    rep='🇸🇳 Alhousseynou Agne est **Sénégalais**, basé à **Dakar**.\n\nIl étudie à l\'**École Supérieure Polytechnique (ESP)** de Dakar — l\'une des meilleures écoles d\'ingénieurs d\'Afrique de l\'Ouest.\n\nIl est fier de représenter la tech sénégalaise ! 💪';
+
+  } else if(has('hobby','loisir','passion','aime','interets','interet')){
+    rep='En dehors de la tech, Alhousseynou est passionné par :\n\n🎨 Le design graphique (Canva, PixelLab)\n📱 Le marketing digital et l\'e-commerce\n🌍 L\'entrepreneuriat et l\'innovation\n📡 Les nouvelles technologies réseaux\n🤖 L\'intelligence artificielle\n\nIl est toujours en train d\'apprendre et de créer ! 🚀';
+
+  } else if(has('langue','parle','wolof','francais','anglais')){
+    rep='Alhousseynou parle :\n\n🇫🇷 **Français** — courant (langue principale)\n🇸🇳 **Wolof** — langue maternelle\n🇬🇧 **Anglais** — notions techniques\n\nIl a même intégré le **Wolof** dans son projet Hemolink pour rendre la plateforme accessible à tous les Sénégalais ! 😊';
+
+  // ===== FORMATION =====
+  } else if(has('formation','etude','diplome','ecole','esp','dic','dut','bac','universite','parcours academique','ingenieur')){
+    rep='🎓 **Parcours académique d\'Alhousseynou :**\n\n📌 **2026 – Présent**\nDIC 1 — Ingénieur en Informatique & Réseaux\nÉcole Supérieure Polytechnique, Dakar\n\n📌 **2024 – 2026**\nDUT Informatique & Réseaux et Télécommunications\nÉcole Supérieure Polytechnique, Dakar\n\n📌 **Mai 2025**\nFormation Marketing Digital & E-commerce\n\n📌 **2023**\nBaccalauréat S1 — Mention Assez Bien\nÉcole Privée Mame Abdou Dabakh\n\nL\'ESP est l\'une des meilleures écoles d\'ingénieurs d\'Afrique de l\'Ouest 🏆';
+
+  // ===== PROJETS GÉNÉRAL =====
+  } else if(has('projet','realisation','travaux','portfolio','a fait','developpe','cree','construit') && !has('hemolink','transpobot','vpls','multi','langage','pabx','bibliotheque','iot','ande')){
+    rep='💼 **Projets d\'Alhousseynou :**\n\n🩸 **Hemolink** — Plateforme don de sang avec IA ✅\n🚌 **TranspoBot** — Gestion flotte + chatbot IA ✅\n🔗 **VFI-VPLS** — Réseau MPLS multi-sites ✅\n📡 **Réseau Multi-AS** — BGP, OSPF, EIGRP ✅\n⚙️ **Analyseur C** — Expressions arithmétiques ✅\n☎️ **Téléphonie IP PABX** — VoIP Asterisk ✅\n📚 **Bibliothèque Java** — Gestion livres ✅\n🌡️ **IoT Arduino** — Capteurs intelligents ✅\n🚗 **Ande Dem** — Covoiturage Sénégal 🔄\n\nCliquez sur **"Voir le projet"** pour les détails de chacun !';
+
+  // ===== PROJETS DÉTAILLÉS =====
+  } else if(has('hemolink','sang','donneur','hopital','transfusion','don de sang')){
+    rep='🩸 **Hemolink** — Son projet phare !\n\nPlateforme intelligente de mise en relation entre **donneurs de sang et hôpitaux** au Sénégal en situation d\'urgence.\n\n✅ Géolocalisation en temps réel\n✅ Algorithme de compatibilité sanguine\n✅ IA de prévision des pénuries\n✅ Interface en **Wolof et Français**\n✅ Mode hors-ligne + SMS\n✅ Notifications d\'urgence\n\n💡 Un projet à fort impact social pour le Sénégal !';
+
+  } else if(has('transpobot','transport','flotte','bus','chauffeur','vehicule','gestion transport')){
+    rep='🚌 **TranspoBot** — Gestion de flotte intelligente\n\nApplication web full-stack avec un **chatbot IA Text-to-SQL** — l\'utilisateur pose une question en français, le système génère automatiquement la requête SQL.\n\n✅ Chatbot GPT-4o-mini intégré\n✅ Tableau de bord temps réel\n✅ Gestion véhicules & chauffeurs\n✅ Suivi trajets & incidents\n✅ API REST sécurisée\n\n🌐 Démo : transpobot-ui.onrender.com\n💻 GitHub : github.com/ix-e/TranspoBot\n🔑 Login démo : gestionnaire2@transpobot.sn\nMDP : Transpo2026!';
+
+  } else if(has('vpls','vfi','mpls','interconnexion','gns3','multi site','sites distants')){
+    rep='🔗 **Interconnexion VFI-VPLS**\n\nImplémentation d\'un réseau **Virtual Private LAN Service** permettant d\'interconnecter plusieurs sites distants comme un seul LAN Ethernet.\n\n✅ Simulation complète sous **GNS3**\n✅ Routeurs **Cisco IOS**\n✅ Protocoles **MPLS et VFI**\n✅ Tests de connectivité inter-sites\n✅ Documentation technique complète\n📄 Rapport téléchargeable dans la section Projets !';
+
+  } else if(has('multi as','multias','bgp','ospf','eigrp','reseau multi','architecture reseau')){
+    rep='📡 **Réseau Multi-AS**\n\nConception d\'une architecture réseau complexe avec plusieurs systèmes autonomes.\n\n✅ Routage statique et dynamique\n✅ Protocoles **RIP, OSPF, EIGRP, BGP**\n✅ Services **NAT, DHCP, DNS**\n✅ Sécurisation du réseau\n✅ Documentation technique\n📄 Rapport téléchargeable dans la section Projets !';
+
+  } else if(has('langage c','analyseur','expression','arithmetique','parseur','lexical','syntaxique')){
+    rep='⚙️ **Analyseur d\'Expressions en Langage C**\n\nProgramme qui analyse et évalue des expressions arithmétiques complexes.\n\n✅ Analyse **lexicale** des expressions\n✅ Analyse **syntaxique**\n✅ Détection d\'erreurs de syntaxe\n✅ Évaluation et calcul du résultat\n\n💻 GitHub : github.com/maimounadiallo4/projet-langage-C';
+
+  } else if(has('pabx','telephonie','voip','asterisk','sip','telephone ip','softphone')){
+    rep='☎️ **Téléphonie IP / PABX**\n\nSystème de téléphonie d\'entreprise basé sur **Asterisk et SIP**.\n\n✅ Configuration PABX complète\n✅ Téléphones IP sur réseau local\n✅ Intégration **softphones**\n✅ Configuration protocole **SIP**\n✅ Tests de communication\n📄 Rapport téléchargeable dans la section Projets !';
+
+  } else if(has('bibliotheque','livre','emprunt','java','poo','gestion bibliotheque')){
+    rep='📚 **Gestion Bibliothèque**\n\nApplication web de gestion complète d\'une bibliothèque universitaire.\n\n✅ Gestion des livres (CRUD)\n✅ Gestion des utilisateurs\n✅ Système d\'emprunts et retours\n✅ Recherche avancée\n✅ Développé en **Java avec POO**\n📄 Rapport téléchargeable dans la section Projets !';
+
+  } else if(has('iot','arduino','capteur','temperature','humidite','eau','embarque','agriculture')){
+    rep='🌡️ **Systèmes Embarqués IoT — Arduino**\n\nSystème de surveillance multi-capteurs pour différents contextes.\n\n✅ Mesure **température corporelle**\n✅ Surveillance **niveau d\'eau**\n✅ Mesure **humidité du sol** (agriculture intelligente)\n✅ Détection d\'**obstacles**\n✅ Basé sur **Arduino Uno**\n✅ Programmé en **C++**';
+
+  } else if(has('ande dem','covoiturage','transport senegal','deplacement','trajet')){
+    rep='🚗 **Ande Dem** — Projet en cours 🔄\n\nPlateforme de covoiturage pour optimiser les déplacements au **Sénégal**.\n\n🔜 Proposition et réservation de trajets\n🔜 Système d\'abonnements\n🔜 Profils conducteurs/passagers\n🔜 Trajets urbains et interrégionaux\n\n💡 Un projet innovant pour la mobilité sénégalaise — à suivre !';
+
+  // ===== COMPÉTENCES =====
+  } else if(has('competence','skill','technologie','maitrise','connait','sait faire','stack','outil') && !has('reseau','dev','web','ia','systeme','securite')){
+    rep='🛠️ **Compétences complètes d\'Alhousseynou :**\n\n💻 **Développement**\nHTML5, CSS3, JavaScript, React.js, PHP, Java, Python, API REST, MySQL, MongoDB, MVC, JWT\n\n📡 **Réseaux & Télécoms**\nTCP/IP, BGP, OSPF, EIGRP, VLAN, NAT, DHCP, DNS, Asterisk, SIP, PABX, Wireshark, GNS3\n\n🖥️ **Administration Système**\nLinux, SSH, Apache, Nginx, Gestion utilisateurs\n\n🤖 **Intelligence Artificielle**\nMachine Learning, APIs IA, Prompt Engineering, Agents IA\n\n🎨 **Design & Marketing**\nFigma, Canva, PixelLab, Marketing Digital, E-commerce\n\n🔒 **Cybersécurité**\nKali Linux, SQL Injection, XSS, HTTPS, Hashage';
+
+  } else if(has('dev','developpement','web','html','css','javascript','react','php','java','python','mysql','mongodb','api')){
+    rep='💻 **Compétences Développement :**\n\n**Frontend :** HTML5, CSS3, JavaScript, React.js, Figma\n**Backend :** PHP, Java, Python, API REST, MVC\n**Bases de données :** MySQL, MongoDB\n**Sécurité :** JWT, Hashage, HTTPS\n**Outils :** GitHub, VS Code\n\nNiveau : **Intermédiaire** — en progression constante 📈';
+
+  } else if(has('reseau','network','cisco','routage','tcp','ip','protocole','infrastructure')){
+    rep='📡 **Compétences Réseaux :**\n\n✅ Modèles OSI et TCP/IP\n✅ BGP, OSPF, EIGRP, RIP\n✅ VLAN, NAT, DHCP, DNS\n✅ Asterisk, SIP, PABX, VoIP\n✅ Wireshark (analyse trafic)\n✅ GNS3 (simulation réseaux)\n✅ Cisco IOS\n\nCertifications : **CCNA Cisco + HCIA Datacom Huawei**\nNiveau : **Avancé** 💪';
+
+  } else if(has('linux','systeme','administration','ssh','serveur','apache','nginx')){
+    rep='🖥️ **Administration Système :**\n\n✅ Linux (Ubuntu, Debian)\n✅ Terminal & scripts Bash\n✅ SSH & accès distant\n✅ Serveurs web Apache/Nginx\n✅ Gestion des utilisateurs\n✅ Hébergement web\n\nNiveau : **Avancé** 💪';
+
+  } else if(has('ia','intelligence artificielle','machine learning','ml','gpt','llm','chatbot','api ia')){
+    rep='🤖 **Intelligence Artificielle :**\n\n✅ Machine Learning (bases)\n✅ APIs IA (GPT, Gemini, Claude)\n✅ Prompt Engineering\n✅ Agents IA\n✅ Text-to-SQL (TranspoBot)\n✅ Automatisation intelligente\n\nNiveau : **Intermédiaire** — domaine en forte progression 📈';
+
+  } else if(has('securite','cybersecurite','hacking','kali','pentest','injection','xss','vulnerability')){
+    rep='🔒 **Cybersécurité :**\n\n✅ Sécurité des applications web\n✅ SQL Injection & XSS (défense)\n✅ Hashage des mots de passe\n✅ HTTPS & certificats\n✅ Kali Linux (notions)\n\nNiveau : **Notions** — en cours d\'apprentissage 📚';
+
+  // ===== EXPÉRIENCE =====
+  } else if(has('experience','stage','travail','emploi','poste','entreprise','job','parcours pro','boulot','carriere')){
+    rep='💼 **Expériences professionnelles :**\n\n🔵 **Business Developer**\nDigital Technologie — Mars 2026 à présent\nDéveloppement commercial, prospection, partenariats\n📄 Contrat téléchargeable\n\n🟢 **Stagiaire Développeur Web**\nISFAD — Mai à Juin 2025\nPlateforme de gestion des emplois du temps\n📄 Rapport téléchargeable\n\n🟣 **Coordinateur Événementiel**\nDép. Informatique ESP — Oct. 2024 à 2026\nOrganisation événements & communications\n\n🟡 **Graphiste Freelance & E-commerçant**\nDepuis Janvier 2024\nDesign graphique, vente produits numériques';
+
+  } else if(has('isfad','stage isfad','stagiaire')){
+    rep='🟢 **Stage à l\'ISFAD** (Mai – Juin 2025)\n\nInstitut Supérieur de Formation À Distance\n\nMission : Développement d\'une **plateforme web** de gestion des emplois du temps et du cahier de texte virtuel.\n\n📄 Le rapport de stage est téléchargeable dans la section Expérience !';
+
+  } else if(has('digital technologie','business developer','commercial')){
+    rep='🔵 **Business Developer — Digital Technologie**\nMars 2026 – Présent\n\nMissions :\n✅ Développement commercial\n✅ Identification d\'opportunités d\'affaires\n✅ Développement du portefeuille clients\n✅ Prospection et négociation\n✅ Suivi des partenariats\n\n📄 Contrat téléchargeable dans la section Expérience !';
+
+  } else if(has('freelance','graphiste','design','canva','pixellab','visuel')){
+    rep='🎨 **Graphiste Freelance & E-commerçant**\nDepuis Janvier 2024\n\n✅ Création de contenus visuels promotionnels\n✅ Maîtrise de **Canva** et **PixelLab**\n✅ Vente de produits numériques\n✅ Marketing digital appliqué\n✅ Stratégie e-commerce\n\nIl combine créativité et tech ! 🚀';
+
+  // ===== CERTIFICATIONS =====
+  } else if(has('certification','certificat','diplome','ccna','hcia','cisco','huawei','attestation')){
+    rep='📜 **Certifications d\'Alhousseynou :**\n\n🌐 **Cisco Networking Academy (CCNA)**\n🔶 **HCIA Datacom — Huawei**\n🎓 **Certificat Informatique & Internet — UNCHK**\n📱 **Marketing Digital**\n📞 **Xelcom Voice**\n\nToutes disponibles en **téléchargement PDF** dans la section Certifications ! ⬇️';
+
+  // ===== CONTACT =====
+  } else if(has('contact','joindre','email','mail','whatsapp','telephone','numero','linkedin','recruter','embaucher','collaboration','travailler avec','opportunite')){
+    rep='📬 **Contacter Alhousseynou :**\n\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68 (WhatsApp)\n💼 linkedin.com/in/alhousseynou-agne-a2a44b279\n📍 Dakar, Sénégal 🇸🇳\n\nOu utilisez le **formulaire de contact** en bas de page — il répond rapidement ! 😊\n\nIl est ouvert aux :\n✅ Stages\n✅ Collaborations\n✅ Projets freelance\n✅ Opportunités pro';
+
+  } else if(has('disponible','cherche','ouvert','opportunite','stage','alternance')){
+    rep='✅ **Oui, Alhousseynou est disponible !**\n\nIl est ouvert à :\n• 🎓 Stages et alternances\n• 💼 Postes en entreprise\n• 🤝 Collaborations techniques\n• 💻 Projets freelance\n\nContactez-le directement :\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68';
+
+  // ===== TÉLÉCHARGEMENTS =====
+  } else if(has('telecharger','download','cv','rapport','pdf','document')){
+    rep='📥 **Téléchargements disponibles :**\n\n📄 **CV** → Bouton "Télécharger CV" en haut de page\n📊 **Rapports projets** → Dans chaque popup "Voir le projet"\n📜 **Certificats** → Section Certifications\n📋 **Contrat & rapports** → Section Expérience\n\nTout est disponible en **PDF gratuit** ! ⬇️';
+
+  // ===== NAVIGATION =====
+  } else if(has('guide','naviguer','comment utiliser','sections','quoi voir','ou trouver','plan du site')){
+    rep='🗺️ **Guide du portfolio :**\n\n🏠 **Accueil** → Présentation & stats\n👤 **À Propos** → Parcours & formation\n🛠️ **Compétences** → Stack technique avec niveaux\n💼 **Projets** → 9 réalisations (cliquez "Voir le projet" !)\n📅 **Expérience** → Parcours pro avec documents\n📜 **Certifications** → 5 certifications téléchargeables\n📬 **Contact** → Formulaire d\'envoi direct\n🤖 **Chatbot** → C\'est moi ! Je réponds à tout 😄\n\nPar où voulez-vous commencer ?';
+
+  // ===== QUESTIONS GÉNÉRALES =====
+  } else if(has('pourquoi informatique','pourquoi ce domaine','motivation','objectif','ambition','vision','futur','avenir')){
+    rep='💡 **Pourquoi l\'informatique ?**\n\nAlhousseynou est passionné par la technologie et son impact sur la société. Il croit que le numérique est un levier puissant pour le développement de l\'Afrique 🌍\n\nSes ambitions :\n🎯 Devenir ingénieur full-stack & réseaux\n🎯 Créer des solutions tech pour l\'Afrique\n🎯 Développer Ande Dem et Hemolink\n🎯 Contribuer à la transformation digitale du Sénégal';
+
+  } else if(has('point fort','qualite','atout','force')){
+    rep='💪 **Points forts d\'Alhousseynou :**\n\n✅ **Polyvalent** — Dev web + Réseaux + IA\n✅ **Curieux** — Toujours en apprentissage\n✅ **Créatif** — Design + Tech + Business\n✅ **Rigoureux** — Documentation soignée\n✅ **Autonome** — Projets personnels ambitieux\n✅ **Bilingue** — Français + Wolof\n✅ **Terrain** — Expérience pro dès le DUT\n\nUn profil rare qui combine technique et business ! 🚀';
+
+  } else if(has('point faible','defaut','axe amelioration','progression')){
+    rep='📈 **Axes de progression d\'Alhousseynou :**\n\nComme tout ingénieur en formation :\n\n🔄 Cybersécurité — en cours d\'approfondissement\n🔄 Mobile (React Native) — à développer\n🔄 DevOps & Cloud — objectif prochain\n🔄 Anglais technique — en amélioration\n\nIl est conscient de ses axes de progression et travaille activement dessus ! 💪';
+
+  } else if(has('salaire','remuneration','pretention','cout','tarif','prix')){
+    rep='Cette information n\'est pas publique sur le portfolio.\n\nPour discuter de rémunération ou de tarifs freelance, contactez directement Alhousseynou :\n\n📧 agnealhousseynou@gmail.com\n📱 +221 77 845 40 68 (WhatsApp)';
+
+  } else if(has('hors sujet','meteo','foot','sport','music','film','jeu','blague','politique','religion') || (!has('alhousseynou','projet','competence','formation','contact','experience','certificat','portfolio') && q.length > 40)){
+    rep='😄 Je suis spécialisé sur le portfolio d\'Alhousseynou — pas encore expert en tout !\n\nMais je peux vous parler de :\n• 👨‍💻 Son profil\n• 💼 Ses projets\n• 🛠️ Ses compétences\n• 🎓 Sa formation\n• 📬 Comment le contacter\n\nQue souhaitez-vous savoir ?';
+
+  // ===== DÉFAUT =====
+  } else {
+    rep='Je ne suis pas sûr de comprendre votre question. 🤔\n\nEssayez de me demander :\n\n• "Qui est Alhousseynou ?"\n• "Quels sont ses projets ?"\n• "Quelles sont ses compétences ?"\n• "Comment le contacter ?"\n• "Parle-moi de Hemolink"\n• "Quelle est sa formation ?"\n\nOu posez votre question autrement, je ferai de mon mieux ! 😊';
   }
+
+  addBot(rep);
+  hist.push({role:'user',content:t},{role:'assistant',content:rep});
 }
 
-function sendSuggestion(b){
-  document.getElementById('chat-input').value = b.textContent;
-  sendMessage();
+// HORLOGE CHATBOT
+function updateClock(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  const el = document.getElementById('chat-clock');
+  if(el) el.textContent = h+':'+m+':'+s;
 }
-
+updateClock();
+setInterval(updateClock, 1000);
 // MAGNETIC BUTTONS
 document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(b=>{
   b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform='translate('+(x*.15)+'px,'+(y*.15)+'px)'});
